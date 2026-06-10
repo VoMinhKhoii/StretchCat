@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stretch Cat - a cat that nags you to stretch</title>
+  <meta name="description" content="Stretch Cat lives in your Mac menu bar and pops up every two hours for a little stretch routine you actually do. Free and notarized for macOS." />
+  <meta property="og:title" content="Stretch Cat" />
+  <meta property="og:description" content="A cat that nags you to stand up and stretch every two hours. Free for macOS." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/icon.png" />
+  <link rel="icon" href="assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="paws" id="paws" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Stretch Cat home">
+      <img src="assets/icon.png" alt="" width="34" height="34" />
+      <span>Stretch&nbsp;Cat</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#action">In action</a>
+      <a href="#moves">The moves</a>
+      <a href="#features">Features</a>
+      <a class="btn btn-primary btn-sm" href="https://github.com/VoMinhKhoii/remember-to-stretch/releases/latest/download/StretchCat.dmg">
+        <i class="ph-bold ph-download-simple"></i> Download
+      </a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bar" aria-hidden="true">
+        <span class="hb-dot"></span>
+        <span>It lives up here, in your menu bar</span>
+        <i class="ph-fill ph-cat hb-cat"></i>
+        <span class="hb-time">2:00</span>
+      </div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1 data-rise>A cat that nags<br>you to
+            <span class="hl">stretch
+              <svg class="squiggle" viewBox="0 0 200 18" preserveAspectRatio="none" aria-hidden="true"><path d="M2 12 Q 25 2, 50 10 T 100 10 T 150 9 T 198 11" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+            </span>.
+          </h1>
+          <p class="lede" data-rise>It sits in your menu bar and pops up every two hours for a little stretch you actually do.</p>
+          <div class="hero-cta" data-rise>
+            <a class="btn btn-primary" href="https://github.com/VoMinhKhoii/remember-to-stretch/releases/latest/download/StretchCat.dmg">
+              <i class="ph-bold ph-download-simple"></i> Download for Mac
+            </a>
+            <a class="btn btn-ghost" href="#action"><i class="ph-bold ph-play-circle"></i> See it move</a>
+          </div>
+        </div>
+        <div class="hero-stage" data-tilt>
+          <span class="blob blob-a" data-par="0.12"></span>
+          <span class="blob blob-b" data-par="0.20"></span>
+          <div class="stage-card" data-tilt-inner>
+            <video src="assets/cat-stretch.mp4" autoplay muted loop playsinline></video>
+            <span class="stage-pill"><i class="ph-fill ph-paw-print"></i> now stretching</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>stretch <i class="ph-fill ph-paw-print"></i> breathe <i class="ph-fill ph-paw-print"></i> reach <i class="ph-fill ph-paw-print"></i> wiggle <i class="ph-fill ph-paw-print"></i> reset <i class="ph-fill ph-paw-print"></i> repeat <i class="ph-fill ph-paw-print"></i> </span>
+        <span>stretch <i class="ph-fill ph-paw-print"></i> breathe <i class="ph-fill ph-paw-print"></i> reach <i class="ph-fill ph-paw-print"></i> wiggle <i class="ph-fill ph-paw-print"></i> reset <i class="ph-fill ph-paw-print"></i> repeat <i class="ph-fill ph-paw-print"></i> </span>
+      </div>
+    </div>
+
+    <!-- THE LOOP -->
+    <section class="loop">
+      <div class="ring-wrap" data-rise>
+        <svg class="ring" viewBox="0 0 220 220" aria-hidden="true">
+          <circle class="ring-bg" cx="110" cy="110" r="96"/>
+          <circle class="ring-fg" cx="110" cy="110" r="96"/>
+        </svg>
+        <div class="ring-label"><b>2h</b><span>then, stretch</span></div>
+      </div>
+      <h2 data-rise>How the nagging works</h2>
+      <ol class="loop-flow">
+        <li data-rise><span class="loop-ic"><i class="ph ph-clock-countdown"></i></span><b>Every 2 hours</b><em>it quietly counts down</em></li>
+        <li data-rise><span class="loop-ic"><i class="ph ph-bell-ringing"></i></span><b>A gentle ping</b><em>a notification, no klaxon</em></li>
+        <li data-rise><span class="loop-ic"><i class="ph ph-cat"></i></span><b>The cat pops up</b><em>and starts stretching</em></li>
+        <li data-rise><span class="loop-ic"><i class="ph ph-check-circle"></i></span><b>You follow along</b><em>about thirty seconds</em></li>
+      </ol>
+    </section>
+
+    <!-- SEE IT IN ACTION (dark stage) -->
+    <section id="action" class="action">
+      <div class="action-head" data-rise>
+        <h2>Quietly there.<br>Impossible to ignore.</h2>
+        <p>A tap on the menu-bar cat opens the controls. When it is time, the whole routine slides in.</p>
+      </div>
+      <div class="scene">
+        <div class="osbar" aria-hidden="true">
+          <span class="os-left"><i class="ph-fill ph-apple-logo"></i> <b>Finder</b> File Edit View</span>
+          <span class="os-right"><i class="ph ph-wifi-high"></i><i class="ph ph-battery-high"></i><i class="ph-fill ph-cat os-cat"></i> 2:00</span>
+        </div>
+        <img class="scene-menu" src="assets/menu.png" alt="Stretch Cat menu-bar dropdown with Stretch now, interval picker, and toggles" data-par="0.06" loading="lazy" />
+        <figure class="scene-pop" data-par="0.14">
+          <video src="assets/cat-stretch.mp4" autoplay muted loop playsinline></video>
+          <figcaption><b>Time to stretch!</b><span>Big stretch - reach up tall</span><i class="pop-snooze">Snooze</i><i class="pop-done">Done</i></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- THE MOVES (bento) -->
+    <section id="moves" class="moves">
+      <div class="moves-head" data-rise>
+        <h2>Four moves.<br>One very flexible cat.</h2>
+        <p>No floppy stick figures. The whole routine is hand animated, and the cat does not skip leg day.</p>
+      </div>
+      <div class="moves-grid">
+        <figure class="move move-big" data-rise>
+          <video src="assets/cat-stretch.mp4" autoplay muted loop playsinline></video>
+          <figcaption>The full routine, on loop</figcaption>
+        </figure>
+        <figure class="move" data-rise><img src="assets/move-1.jpg" alt="Cat reaching both paws up in a big stretch" loading="lazy"/><figcaption>Big stretch</figcaption></figure>
+        <figure class="move" data-rise><img src="assets/move-2.jpg" alt="Cat leaning forward in a hip hinge" loading="lazy"/><figcaption>Forward fold</figcaption></figure>
+        <figure class="move" data-rise><img src="assets/move-3.jpg" alt="Cat reaching upward" loading="lazy"/><figcaption>Reach for it</figcaption></figure>
+        <figure class="move" data-rise><img src="assets/move-4.jpg" alt="Cat lifting one paw in a wave" loading="lazy"/><figcaption>Wiggle and wave</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="features">
+      <div class="features-head" data-rise>
+        <h2>Small app. Big on not annoying you.</h2>
+        <p>It does one thing, stays out of your way, and never asks for an account.</p>
+      </div>
+      <ul class="feature-list">
+        <li data-rise><i class="ph ph-list-dashes"></i><div><b>Lives in your menu bar</b><span>A little cat face up top. No Dock clutter, no window to babysit.</span></div></li>
+        <li data-rise><i class="ph ph-clock"></i><div><b>Set your own pace</b><span>Remind me every 1, 2, or 3 hours. Pause it when you are deep in.</span></div></li>
+        <li data-rise><i class="ph ph-bell-simple"></i><div><b>Gentle, skippable nudges</b><span>Snooze ten minutes or mark it done. Your call, every time.</span></div></li>
+        <li data-rise><i class="ph ph-power"></i><div><b>Starts with your Mac</b><span>Flip on launch at login and forget it is even there.</span></div></li>
+        <li data-rise><i class="ph ph-shield-check"></i><div><b>Notarized by Apple</b><span>Opens clean, with no scary unidentified-developer warning.</span></div></li>
+        <li data-rise><i class="ph ph-heart"></i><div><b>Free and open source</b><span>MIT licensed. Read every line on GitHub.</span></div></li>
+      </ul>
+    </section>
+
+    <!-- DOWNLOAD -->
+    <section class="download">
+      <img class="dl-cat" src="assets/cat.png" alt="" />
+      <h2 data-rise>Ready when you are.</h2>
+      <p data-rise>Free, about two megabytes, and your spine will thank you.</p>
+      <a class="btn btn-primary btn-lg" id="dl-btn" href="https://github.com/VoMinhKhoii/remember-to-stretch/releases/latest/download/StretchCat.dmg" data-rise>
+        <i class="ph-bold ph-download-simple"></i> Download for Mac
+      </a>
+      <p class="dl-meta" data-rise>macOS 13 Ventura or later. Open the .dmg, drag to Applications.</p>
+      <div class="brew" data-rise>
+        <span class="brew-label">Prefer the terminal?</span>
+        <code>brew install --cask vominhkhoii/stretch-cat/stretch-cat</code>
+        <button class="brew-copy" data-copy="brew install --cask vominhkhoii/stretch-cat/stretch-cat" aria-label="Copy install command"><i class="ph ph-copy"></i></button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot-brand"><img src="assets/icon.png" alt="" width="28" height="28"/> Stretch Cat</div>
+    <nav class="foot-links">
+      <a href="https://github.com/VoMinhKhoii/remember-to-stretch">GitHub</a>
+      <a href="https://github.com/VoMinhKhoii/remember-to-stretch/releases">Releases</a>
+      <a href="https://github.com/VoMinhKhoii/remember-to-stretch/blob/main/LICENSE">License</a>
+    </nav>
+    <p class="foot-note">Made for people who sit too much.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

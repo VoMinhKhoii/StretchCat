@@ -8,3 +8,5 @@ Resources/_mb_*.png
 _verify/
 _vid/
 _assets/
+.gstack/
+.swiftpm/
