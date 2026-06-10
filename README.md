@@ -21,7 +21,7 @@ brew install --cask vominhkhoii/stretch-cat/stretch-cat
 ```
 
 **Direct download**
-Grab `StretchCat.dmg` from the [latest release](https://github.com/VoMinhKhoii/remember-to-stretch/releases),
+Grab `StretchCat.dmg` from the [latest release](https://github.com/VoMinhKhoii/StretchCat/releases),
 open it, and drag **Stretch Cat** to Applications.
 
 > Requires macOS 13 (Ventura) or later. Allow notifications on first launch so
@@ -29,8 +29,8 @@ open it, and drag **Stretch Cat** to Applications.
 
 ## Build from source
 ```bash
-git clone https://github.com/VoMinhKhoii/remember-to-stretch
-cd remember-to-stretch
+git clone https://github.com/VoMinhKhoii/StretchCat
+cd StretchCat
 ./build.sh            # builds build/StretchCat.app (universal, ad-hoc signed)
 open build/StretchCat.app
 ```

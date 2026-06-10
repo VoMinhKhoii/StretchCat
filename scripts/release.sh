@@ -7,12 +7,12 @@
 #   DEV_ID_APP      e.g. "Developer ID Application: Khoi Vo (ZNG57U88R5)"
 #   NOTARY_PROFILE  notarytool keychain profile name (see README "Publishing")
 #   VERSION         e.g. 1.0.0   (defaults to the value in build.sh)
-#   GH_REPO         e.g. VoMinhKhoii/remember-to-stretch
+#   GH_REPO         e.g. VoMinhKhoii/StretchCat
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
 VERSION="${VERSION:-1.0.0}"
-GH_REPO="${GH_REPO:-VoMinhKhoii/remember-to-stretch}"
+GH_REPO="${GH_REPO:-VoMinhKhoii/StretchCat}"
 : "${DEV_ID_APP:?set DEV_ID_APP to your Developer ID Application identity}"
 : "${NOTARY_PROFILE:?set NOTARY_PROFILE to your notarytool keychain profile}"
 
