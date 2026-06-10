@@ -1,0 +1,10 @@
+.build/
+build/
+*.dmg
+*.zip
+.DS_Store
+Resources/parts/
+Resources/_mb_*.png
+_verify/
+_vid/
+_assets/

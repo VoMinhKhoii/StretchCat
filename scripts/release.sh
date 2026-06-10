@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+#
+# Full release pipeline for the direct-download channel:
+#   build (signed) -> notarize -> DMG (notarized) -> GitHub release -> cask bump
+#
+# Requirements (set as env vars):
+#   DEV_ID_APP      e.g. "Developer ID Application: Khoi Vo (ZNG57U88R5)"
+#   NOTARY_PROFILE  notarytool keychain profile name (see README "Publishing")
+#   VERSION         e.g. 1.0.0   (defaults to the value in build.sh)
+#   GH_REPO         e.g. VoMinhKhoii/remember-to-stretch
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+VERSION="${VERSION:-1.0.0}"
+GH_REPO="${GH_REPO:-VoMinhKhoii/remember-to-stretch}"
+: "${DEV_ID_APP:?set DEV_ID_APP to your Developer ID Application identity}"
+: "${NOTARY_PROFILE:?set NOTARY_PROFILE to your notarytool keychain profile}"
+
+echo "==> 1/5 Building + signing app"
+./build.sh "$DEV_ID_APP"
+
+echo "==> 2/5 Notarizing app"
+rm -f build/StretchCat.zip
+ditto -c -k --keepParent build/StretchCat.app build/StretchCat.zip
+xcrun notarytool submit build/StretchCat.zip --keychain-profile "$NOTARY_PROFILE" --wait
+xcrun stapler staple build/StretchCat.app
+# re-zip the stapled app for the zip asset
+rm -f build/StretchCat.zip
+ditto -c -k --keepParent build/StretchCat.app build/StretchCat.zip
+
+echo "==> 3/5 Building + notarizing DMG"
+DEV_ID_APP="$DEV_ID_APP" NOTARY_PROFILE="$NOTARY_PROFILE" bash scripts/make_dmg.sh
+
+DMG_SHA=$(shasum -a 256 build/StretchCat.dmg | awk '{print $1}')
+echo "    DMG sha256: $DMG_SHA"
+
+echo "==> 4/5 Creating GitHub release v$VERSION"
+gh release create "v$VERSION" \
+    build/StretchCat.dmg build/StretchCat.zip \
+    --repo "$GH_REPO" \
+    --title "Stretch Cat v$VERSION" \
+    --notes "Menu-bar app that reminds you to stand up and stretch every 2 hours, starring an animated calico cat. Notarized for Gatekeeper.
+
+**Install:** download \`StretchCat.dmg\`, open it, drag Stretch Cat to Applications.
+**Or:** \`brew install --cask vominhkhoii/stretch-cat/stretch-cat\`"
+
+echo "==> 5/5 Updating Homebrew cask"
+DOWNLOAD_URL="https://github.com/${GH_REPO}/releases/download/v${VERSION}/StretchCat.dmg"
+sed -e "s|__VERSION__|${VERSION}|g" \
+    -e "s|__SHA256__|${DMG_SHA}|g" \
+    -e "s|__URL__|${DOWNLOAD_URL}|g" \
+    Casks/stretch-cat.rb.tmpl > Casks/stretch-cat.rb
+echo "    wrote Casks/stretch-cat.rb"
+
+echo ""
+echo "✅ Released v$VERSION. Commit Casks/stretch-cat.rb and push the tap so"
+echo "   'brew install --cask' picks up the new version."
