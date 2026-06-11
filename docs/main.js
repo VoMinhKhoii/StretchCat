@@ -89,6 +89,150 @@
     }
   }
 
+  /* ---- interactive MacBook menu + popup ---- */
+  (function () {
+    const menu = document.getElementById("scMenu");
+    const pop = document.getElementById("scPop");
+    const trigger = document.getElementById("catTrigger");
+    const hint = document.getElementById("catHint");
+    if (!menu || !pop || !trigger) return;
+
+    let autoCountId = null;
+
+    // The "click me" callout points at the icon — show it only while nothing
+    // is open, so it never fights the menu or popup for attention.
+    function refreshHint() {
+      if (!hint) return;
+      hint.classList.toggle("is-hidden", !menu.hidden || !pop.hidden);
+    }
+
+    function openMenu() {
+      menu.hidden = false;
+      trigger.setAttribute("aria-expanded", "true");
+      requestAnimationFrame(() => menu.classList.add("is-open"));
+      refreshHint();
+    }
+    function closeMenu() {
+      trigger.setAttribute("aria-expanded", "false");
+      menu.classList.remove("is-open");
+      if (reduce) { menu.hidden = true; refreshHint(); return; }
+      menu.addEventListener("transitionend", function h() {
+        if (!menu.classList.contains("is-open")) menu.hidden = true;
+        menu.removeEventListener("transitionend", h);
+        refreshHint();
+      }, { once: true });
+    }
+    function toggleMenu() { menu.hidden ? openMenu() : closeMenu(); }
+
+    // Swap menu -> popup as a single clean transition: the menu fully closes
+    // before the popup appears, so the two are never on screen together (which
+    // looked broken on the stacked mobile layout).
+    function transitionToPopup() {
+      if (menu.hidden || reduce) { closeMenu(); showPop(); return; }
+      closeMenu();
+      menu.addEventListener("transitionend", function h() {
+        menu.removeEventListener("transitionend", h);
+        showPop();
+      }, { once: true });
+    }
+
+    function showPop() {
+      pop.hidden = false;
+      requestAnimationFrame(() => pop.classList.add("is-open"));
+      startCountdown();
+      refreshHint();
+    }
+    function hidePop() {
+      clearInterval(autoCountId);
+      pop.classList.remove("is-open");
+      if (reduce) { pop.hidden = true; refreshHint(); return; }
+      pop.addEventListener("transitionend", function h() {
+        if (!pop.classList.contains("is-open")) pop.hidden = true;
+        pop.removeEventListener("transitionend", h);
+        refreshHint();
+      }, { once: true });
+    }
+    function startCountdown() {
+      clearInterval(autoCountId);
+      if (reduce) return;
+      let s = 30;
+      const el = document.getElementById("scAuto");
+      autoCountId = setInterval(() => {
+        s--;
+        el.textContent = "Auto-closes in " + s + "s";
+        if (s <= 0) hidePop();
+      }, 1000);
+    }
+
+    trigger.addEventListener("click", toggleMenu);
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      if (!menu.hidden) closeMenu();
+      if (!pop.hidden) hidePop();
+    });
+    document.addEventListener("pointerdown", (e) => {
+      if (menu.hidden) return;
+      if (!menu.contains(e.target) && !trigger.contains(e.target)) closeMenu();
+    });
+
+    /* segmented interval picker */
+    const segStatus = { 1: "Next stretch in 58m", 2: "Next stretch in 1h 23m", 3: "Next stretch in 2h 47m" };
+    menu.querySelectorAll(".scm-seg-opt").forEach((opt) => {
+      opt.addEventListener("click", () => {
+        menu.querySelectorAll(".scm-seg-opt").forEach((o) => {
+          o.classList.remove("is-on");
+          o.setAttribute("aria-checked", "false");
+        });
+        opt.classList.add("is-on");
+        opt.setAttribute("aria-checked", "true");
+        document.getElementById("scStatus").textContent = segStatus[opt.dataset.h];
+      });
+    });
+
+    /* toggles */
+    menu.querySelectorAll(".scm-switch").forEach((sw) => {
+      sw.addEventListener("click", () => {
+        const on = sw.classList.toggle("is-on");
+        sw.setAttribute("aria-checked", String(on));
+      });
+    });
+
+    /* stretch now -> popup */
+    document.getElementById("scStretchNow").addEventListener("click", transitionToPopup);
+    document.getElementById("scSnooze").addEventListener("click", hidePop);
+    document.getElementById("scDone").addEventListener("click", hidePop);
+    menu.querySelector(".scm-quit").addEventListener("click", closeMenu);
+
+    /* auto-open when scrolled into view, demo popup once */
+    function runIntro() {
+      if (reduce) {
+        menu.hidden = false;
+        menu.classList.add("is-open");
+        trigger.setAttribute("aria-expanded", "true");
+        refreshHint();
+        return;
+      }
+      openMenu();
+      // Show the controls, then the menu tucks away and the reminder slides in
+      // — one clean swap, the same on every screen size.
+      setTimeout(() => { if (pop.hidden) transitionToPopup(); }, 2600);
+    }
+
+    refreshHint();
+
+    const mb = document.querySelector(".mb");
+    if (reduce || !("IntersectionObserver" in window) || !mb) {
+      runIntro();
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) { runIntro(); io.disconnect(); }
+        });
+      }, { threshold: 0.4 });
+      io.observe(mb);
+    }
+  })();
+
   /* ---- brew copy ---- */
   const btn = document.querySelector(".brew-copy");
   if (btn) {

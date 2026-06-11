@@ -1,17 +1,17 @@
 import SwiftUI
 import AppKit
+import UserNotifications
 
 @main
 struct StretchCatApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
+    // The menu bar item is managed directly via NSStatusItem in AppDelegate so
+    // we can detect when the icon is hidden behind the notch (occlusionState).
+    // This empty scene just keeps the SwiftUI App alive; LSUIElement keeps it
+    // out of the Dock.
     var body: some Scene {
-        MenuBarExtra {
-            MenuPanel(manager: appDelegate.manager, dismiss: {})
-        } label: {
-            Image(nsImage: MenuBarIcon.image)
-        }
-        .menuBarExtraStyle(.window)
+        Settings { EmptyView() }
     }
 }
 
@@ -34,7 +34,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     let manager = ReminderManager()
     private let popup = PopupController()
 
+    private var statusItem: NSStatusItem!
+    private let popover = NSPopover()
+    /// Debounce token so a brief, transient occlusion doesn't trigger the warning.
+    private var notchCheck: DispatchWorkItem?
+
     func applicationDidFinishLaunching(_ notification: Notification) {
+        setupStatusItem()
+
         manager.onStretch = { [weak self] exercise in
             self?.popup.show(exercise, onSnooze: { [weak self] in
                 self?.snooze()
@@ -73,6 +80,74 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if let data = rep.representation(using: .png, properties: [:]) {
             try? data.write(to: URL(fileURLWithPath: path))
         }
+    }
+
+    // MARK: Menu bar status item
+
+    private func setupStatusItem() {
+        let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        item.button?.image = MenuBarIcon.image
+        item.button?.action = #selector(togglePanel(_:))
+        item.button?.target = self
+        statusItem = item
+
+        popover.behavior = .transient
+        popover.contentViewController = NSHostingController(
+            rootView: MenuPanel(manager: manager, dismiss: { [weak self] in
+                self?.popover.performClose(nil)
+            })
+        )
+
+        // The status item's window isn't attached synchronously — observe its
+        // occlusion on the next runloop tick so we can tell when the icon gets
+        // hidden behind the notch (the only signal macOS offers; isVisible
+        // stays true even when hidden). See Tailscale's same workaround.
+        DispatchQueue.main.async { [weak self] in
+            guard let self, let win = self.statusItem.button?.window else { return }
+            NotificationCenter.default.addObserver(
+                self, selector: #selector(self.occlusionChanged(_:)),
+                name: NSWindow.didChangeOcclusionStateNotification, object: win)
+        }
+    }
+
+    @objc private func togglePanel(_ sender: Any?) {
+        guard let button = statusItem.button else { return }
+        if popover.isShown {
+            popover.performClose(sender)
+        } else {
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+            popover.contentViewController?.view.window?.makeKey()
+        }
+    }
+
+    @objc private func occlusionChanged(_ note: Notification) {
+        guard let win = note.object as? NSWindow else { return }
+        notchCheck?.cancel()
+        guard !win.occlusionState.contains(.visible) else { return }
+
+        // Only warn if still hidden ~3s later, so opening a menu (which briefly
+        // occludes the bar) doesn't trip it.
+        let work = DispatchWorkItem { [weak self, weak win] in
+            guard let win, !win.occlusionState.contains(.visible) else { return }
+            self?.warnHiddenBehindNotchOnce()
+        }
+        notchCheck = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: work)
+    }
+
+    /// Posts a single lifetime notification guiding the user when the cat icon
+    /// is buried behind the notch. Reminders keep firing regardless.
+    private func warnHiddenBehindNotchOnce() {
+        let key = "didWarnNotchHidden"
+        guard !UserDefaults.standard.bool(forKey: key) else { return }
+        UserDefaults.standard.set(true, forKey: key)
+
+        let content = UNMutableNotificationContent()
+        content.title = "Stretch Cat is hidden behind the notch 🐾"
+        content.body = "Your menu bar is full. ⌘-drag the cat icon left, or remove an item, to open its controls. Reminders still work."
+        content.sound = .default
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request)
     }
 
     /// Snooze: re-show a break in 10 minutes without disturbing the cadence.

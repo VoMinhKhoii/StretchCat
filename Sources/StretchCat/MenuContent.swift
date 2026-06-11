@@ -91,22 +91,12 @@ struct MenuPanel: View {
 
             Divider()
 
-            Toggle(isOn: Binding(
+            settingRow(icon: "bell.fill", title: "Reminders", isOn: Binding(
                 get: { !manager.isPaused },
                 set: { manager.isPaused = !$0 }
-            )) {
-                Label("Reminders", systemImage: "bell.fill")
-                    .font(.system(size: 13))
-            }
-            .toggleStyle(.switch)
-            .tint(accent)
+            ))
 
-            Toggle(isOn: $manager.launchAtLogin) {
-                Label("Launch at login", systemImage: "power")
-                    .font(.system(size: 13))
-            }
-            .toggleStyle(.switch)
-            .tint(accent)
+            settingRow(icon: "power", title: "Launch at login", isOn: $manager.launchAtLogin)
 
             Divider()
 
@@ -119,6 +109,21 @@ struct MenuPanel: View {
             .buttonStyle(.plain)
         }
         .padding(14)
+    }
+
+    /// A settings row: leading icon (fixed-width column) + title, switch trailing.
+    /// Laid out manually so every row aligns identically.
+    private func settingRow(icon: String, title: String, isOn: Binding<Bool>) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: icon).frame(width: 20)
+            Text(title)
+            Spacer()
+            Toggle("", isOn: isOn)
+                .toggleStyle(.switch)
+                .tint(accent)
+                .labelsHidden()
+        }
+        .font(.system(size: 13))
     }
 
     // MARK: Status

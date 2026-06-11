@@ -30,6 +30,7 @@
       <a href="#action">In action</a>
       <a href="#moves">The moves</a>
       <a href="#features">Features</a>
+      <a href="#faq">FAQ</a>
       <a class="btn btn-primary btn-sm" href="https://github.com/VoMinhKhoii/StretchCat/releases/latest/download/StretchCat.dmg">
         <i class="ph-bold ph-download-simple"></i> Download
       </a>
@@ -104,16 +105,99 @@
         <h2>Quietly there.<br>Impossible to ignore.</h2>
         <p>A tap on the menu-bar cat opens the controls. When it is time, the whole routine slides in.</p>
       </div>
-      <div class="scene">
-        <div class="osbar" aria-hidden="true">
-          <span class="os-left"><i class="ph-fill ph-apple-logo"></i> <b>Finder</b> File Edit View</span>
-          <span class="os-right"><i class="ph ph-wifi-high"></i><i class="ph ph-battery-high"></i><i class="ph-fill ph-cat os-cat"></i> 2:00</span>
+      <!-- live, interactive MacBook mockup -->
+      <div class="mb" data-rise>
+        <div class="mb-screen">
+          <div class="mb-desktop">
+
+            <!-- macOS menu bar (with notch) -->
+            <div class="osbar2" role="presentation">
+              <span class="os2-left">
+                <i class="ph-fill ph-apple-logo"></i>
+                <b>Stretch Cat</b><span>File</span><span>Edit</span><span>View</span>
+              </span>
+              <span class="mb-notch" aria-hidden="true"></span>
+              <span class="os2-right">
+                <i class="ph ph-magnifying-glass"></i>
+                <i class="ph-fill ph-sliders-horizontal"></i>
+                <i class="ph ph-wifi-high"></i>
+                <i class="ph-fill ph-battery-high"></i>
+                <button class="os2-cat" id="catTrigger" type="button"
+                        aria-haspopup="true" aria-expanded="false" aria-controls="scMenu"
+                        aria-label="Open Stretch Cat menu">
+                  <img src="assets/menubar-cat.png" alt="" width="20" height="17" />
+                </button>
+                <span class="os2-clock">Wed 2:00</span>
+              </span>
+            </div>
+
+            <!-- "click the cat" callout pointing at the menu-bar icon -->
+            <div class="mb-hint" id="catHint" aria-hidden="true">
+              <span class="mb-hint-label">click&nbsp;the&nbsp;cat</span>
+              <svg class="mb-hint-arrow" viewBox="0 0 46 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 45 C 1 22, 12 10, 30 7" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                <path d="M30 7 L 21 8 M30 7 L 32 18" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <!-- live dropdown (recreated from the real app) -->
+            <div class="sc-menu" id="scMenu" role="menu" aria-label="Stretch Cat" hidden>
+              <div class="scm-header">
+                <video class="scm-vid" src="assets/cat-stretch.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+                <span class="scm-grad" aria-hidden="true"></span>
+                <div class="scm-head-row">
+                  <span class="scm-title-wrap">
+                    <span class="scm-title">Stretch Cat</span>
+                    <span class="scm-status" id="scStatus">Next stretch in 1h 23m</span>
+                  </span>
+                  <i class="ph ph-person-simple-walk scm-flex" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="scm-body">
+                <button class="scm-cta" id="scStretchNow" type="button" role="menuitem">
+                  <i class="ph-fill ph-sparkle"></i> Stretch now
+                </button>
+                <div class="scm-field">
+                  <span class="scm-label" id="scIntLabel">REMIND ME EVERY</span>
+                  <div class="scm-seg" role="radiogroup" aria-labelledby="scIntLabel">
+                    <button class="scm-seg-opt" type="button" role="radio" aria-checked="false" data-h="1">1 hour</button>
+                    <button class="scm-seg-opt is-on" type="button" role="radio" aria-checked="true" data-h="2">2 hours</button>
+                    <button class="scm-seg-opt" type="button" role="radio" aria-checked="false" data-h="3">3 hours</button>
+                  </div>
+                </div>
+                <hr class="scm-div" />
+                <div class="scm-row">
+                  <span class="scm-row-l"><i class="ph-fill ph-bell"></i> Reminders</span>
+                  <button class="scm-switch is-on" type="button" role="switch" aria-checked="true" aria-label="Reminders"><span class="scm-knob"></span></button>
+                </div>
+                <div class="scm-row">
+                  <span class="scm-row-l"><i class="ph ph-power"></i> Launch at login</span>
+                  <button class="scm-switch" type="button" role="switch" aria-checked="false" aria-label="Launch at login"><span class="scm-knob"></span></button>
+                </div>
+                <hr class="scm-div" />
+                <button class="scm-quit" type="button" role="menuitem"><i class="ph ph-x-circle"></i> Quit Stretch Cat</button>
+              </div>
+            </div>
+
+            <!-- follow-along popup -->
+            <figure class="sc-pop" id="scPop" role="dialog" aria-label="Time to stretch" hidden>
+              <video class="scp-vid" src="assets/cat-stretch.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
+              <figcaption class="scp-body">
+                <span class="scp-kicker">TIME TO STRETCH</span>
+                <b class="scp-name">Big stretch</b>
+                <span class="scp-cue">Reach up tall and lengthen your spine.</span>
+                <span class="scp-actions">
+                  <button class="scp-snooze" id="scSnooze" type="button">Snooze 10m</button>
+                  <button class="scp-done" id="scDone" type="button">Done ✓</button>
+                </span>
+                <span class="scp-auto" id="scAuto">Auto-closes in 30s</span>
+              </figcaption>
+            </figure>
+
+          </div>
+          <span class="mb-glare" aria-hidden="true"></span>
         </div>
-        <img class="scene-menu" src="assets/menu.png" alt="Stretch Cat menu-bar dropdown with Stretch now, interval picker, and toggles" data-par="0.06" loading="lazy" />
-        <figure class="scene-pop" data-par="0.14">
-          <video src="assets/cat-stretch.mp4" autoplay muted loop playsinline></video>
-          <figcaption><b>Time to stretch!</b><span>Big stretch - reach up tall</span><i class="pop-snooze">Snooze</i><i class="pop-done">Done</i></figcaption>
-        </figure>
+        <div class="mb-base" aria-hidden="true"><span class="mb-notch-base"></span></div>
       </div>
     </section>
 
@@ -149,6 +233,40 @@
         <li data-rise><i class="ph ph-shield-check"></i><div><b>Notarized by Apple</b><span>Opens clean, with no scary unidentified-developer warning.</span></div></li>
         <li data-rise><i class="ph ph-heart"></i><div><b>Free and open source</b><span>MIT licensed. Read every line on GitHub.</span></div></li>
       </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+      <div class="faq-head" data-rise>
+        <h2>Questions, answered.</h2>
+        <p>The short version: it is free, private, and stays out of your way.</p>
+      </div>
+      <div class="faq-list">
+        <details data-rise>
+          <summary>Is it really free?<i class="ph ph-caret-down" aria-hidden="true"></i></summary>
+          <p>Yes. Free and open source under the MIT license, no account, no upsell. The whole thing is about two megabytes.</p>
+        </details>
+        <details data-rise>
+          <summary>The cat icon disappeared behind my MacBook notch. Help?<i class="ph ph-caret-down" aria-hidden="true"></i></summary>
+          <p>macOS hides menu-bar icons when the bar runs out of room next to the notch, and it offers no overflow menu. ⌘-drag the cat icon further left, move some system icons into Control Center, or quit a menu-bar app you are not using. Your stretch reminders keep firing even while the icon is hidden — and Stretch Cat will nudge you once if it notices it is buried.</p>
+        </details>
+        <details data-rise>
+          <summary>Does it phone home or collect any data?<i class="ph ph-caret-down" aria-hidden="true"></i></summary>
+          <p>No. Everything runs locally on your Mac. No network calls, no analytics, no account, nothing to opt out of.</p>
+        </details>
+        <details data-rise>
+          <summary>How do I change how often it nags me?<i class="ph ph-caret-down" aria-hidden="true"></i></summary>
+          <p>Click the cat in your menu bar and pick 1, 2, or 3 hours under “Remind me every.” You can pause reminders anytime, or hit “Stretch now” when you want one early.</p>
+        </details>
+        <details data-rise>
+          <summary>Will it slow down or clutter my Mac?<i class="ph ph-caret-down" aria-hidden="true"></i></summary>
+          <p>It is a tiny menu-bar app with no Dock icon and no window to babysit. It sits quietly and counts down — that is the whole job.</p>
+        </details>
+        <details data-rise>
+          <summary>Is it safe to install?<i class="ph ph-caret-down" aria-hidden="true"></i></summary>
+          <p>Yes — it is notarized by Apple, so it opens cleanly with no “unidentified developer” warning. You can also read every line of the source on GitHub.</p>
+        </details>
+      </div>
     </section>
 
     <!-- DOWNLOAD -->

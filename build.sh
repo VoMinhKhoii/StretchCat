@@ -16,8 +16,8 @@ cd "$(dirname "$0")"
 
 APP_NAME="StretchCat"
 BUNDLE_ID="com.khoivo.stretchcat"
-VERSION="1.0.0"
-BUILD="1"
+VERSION="1.1.0"
+BUILD="2"
 SIGN_IDENTITY="${1:--}"   # default "-" = ad-hoc
 
 APP_DIR="build/${APP_NAME}.app"
