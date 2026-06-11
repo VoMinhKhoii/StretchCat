@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Stretch Cat - a cat that nags you to stretch</title>
-  <meta name="description" content="Stretch Cat lives in your Mac menu bar and pops up every two hours for a little stretch routine you actually do. Free and notarized for macOS." />
-  <meta property="og:title" content="Stretch Cat" />
+  <title>StretchCat - a cat that nags you to stretch</title>
+  <meta name="description" content="StretchCat lives in your Mac menu bar and pops up every two hours for a little stretch routine you actually do. Free and notarized for macOS." />
+  <meta property="og:title" content="StretchCat" />
   <meta property="og:description" content="A cat that nags you to stand up and stretch every two hours. Free for macOS." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="assets/icon.png" />
@@ -22,7 +22,7 @@
 
   <!-- NAV -->
   <header class="nav">
-    <a class="brand" href="#top" aria-label="Stretch Cat home">
+    <a class="brand" href="#top" aria-label="StretchCat home">
       <img src="assets/icon.png" alt="" width="34" height="34" />
       <span>Stretch&nbsp;Cat</span>
     </a>
@@ -31,6 +31,9 @@
       <a href="#moves">The moves</a>
       <a href="#features">Features</a>
       <a href="#faq">FAQ</a>
+      <button class="btn btn-ghost btn-sm" type="button" data-support>
+        <i class="ph-bold ph-currency-dollar"></i> Support
+      </button>
       <a class="btn btn-primary btn-sm" href="https://github.com/VoMinhKhoii/StretchCat/releases/latest/download/StretchCat.dmg">
         <i class="ph-bold ph-download-simple"></i> Download
       </a>
@@ -49,7 +52,7 @@
       </div>
       <div class="hero-inner">
         <div class="hero-copy">
-          <h1 data-rise>A cat that nags<br>you to
+          <h1 data-rise>A cat that reminds<br>you to
             <span class="hl">stretch
               <svg class="squiggle" viewBox="0 0 200 18" preserveAspectRatio="none" aria-hidden="true"><path d="M2 12 Q 25 2, 50 10 T 100 10 T 150 9 T 198 11" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
             </span>.
@@ -90,7 +93,7 @@
         </svg>
         <div class="ring-label"><b>2h</b><span>then, stretch</span></div>
       </div>
-      <h2 data-rise>How the nagging works</h2>
+      <h2 data-rise>How the reminder works</h2>
       <ol class="loop-flow">
         <li data-rise><span class="loop-ic"><i class="ph ph-clock-countdown"></i></span><b>Every 2 hours</b><em>it quietly counts down</em></li>
         <li data-rise><span class="loop-ic"><i class="ph ph-bell-ringing"></i></span><b>A gentle ping</b><em>a notification, no klaxon</em></li>
@@ -114,7 +117,7 @@
             <div class="osbar2" role="presentation">
               <span class="os2-left">
                 <i class="ph-fill ph-apple-logo"></i>
-                <b>Stretch Cat</b><span>File</span><span>Edit</span><span>View</span>
+                <b>StretchCat</b><span>File</span><span>Edit</span><span>View</span>
               </span>
               <span class="mb-notch" aria-hidden="true"></span>
               <span class="os2-right">
@@ -124,7 +127,7 @@
                 <i class="ph-fill ph-battery-high"></i>
                 <button class="os2-cat" id="catTrigger" type="button"
                         aria-haspopup="true" aria-expanded="false" aria-controls="scMenu"
-                        aria-label="Open Stretch Cat menu">
+                        aria-label="Open StretchCat menu">
                   <img src="assets/menubar-cat.png" alt="" width="20" height="17" />
                 </button>
                 <span class="os2-clock">Wed 2:00</span>
@@ -141,13 +144,13 @@
             </div>
 
             <!-- live dropdown (recreated from the real app) -->
-            <div class="sc-menu" id="scMenu" role="menu" aria-label="Stretch Cat" hidden>
+            <div class="sc-menu" id="scMenu" role="menu" aria-label="StretchCat" hidden>
               <div class="scm-header">
                 <video class="scm-vid" src="assets/cat-stretch.mp4" autoplay muted loop playsinline aria-hidden="true"></video>
                 <span class="scm-grad" aria-hidden="true"></span>
                 <div class="scm-head-row">
                   <span class="scm-title-wrap">
-                    <span class="scm-title">Stretch Cat</span>
+                    <span class="scm-title">StretchCat</span>
                     <span class="scm-status" id="scStatus">Next stretch in 1h 23m</span>
                   </span>
                   <i class="ph ph-person-simple-walk scm-flex" aria-hidden="true"></i>
@@ -175,7 +178,7 @@
                   <button class="scm-switch" type="button" role="switch" aria-checked="false" aria-label="Launch at login"><span class="scm-knob"></span></button>
                 </div>
                 <hr class="scm-div" />
-                <button class="scm-quit" type="button" role="menuitem"><i class="ph ph-x-circle"></i> Quit Stretch Cat</button>
+                <button class="scm-quit" type="button" role="menuitem"><i class="ph ph-x-circle"></i> Quit StretchCat</button>
               </div>
             </div>
 
@@ -248,7 +251,7 @@
         </details>
         <details data-rise>
           <summary>The cat icon disappeared behind my MacBook notch. Help?<i class="ph ph-caret-down" aria-hidden="true"></i></summary>
-          <p>macOS hides menu-bar icons when the bar runs out of room next to the notch, and it offers no overflow menu. ⌘-drag the cat icon further left, move some system icons into Control Center, or quit a menu-bar app you are not using. Your stretch reminders keep firing even while the icon is hidden — and Stretch Cat will nudge you once if it notices it is buried.</p>
+          <p>macOS hides menu-bar icons when the bar runs out of room next to the notch, and it offers no overflow menu. ⌘-drag the cat icon further left, move some system icons into Control Center, or quit a menu-bar app you are not using. Your stretch reminders keep firing even while the icon is hidden — and StretchCat will nudge you once if it notices it is buried.</p>
         </details>
         <details data-rise>
           <summary>Does it phone home or collect any data?<i class="ph ph-caret-down" aria-hidden="true"></i></summary>
@@ -283,18 +286,54 @@
         <code>brew install --cask vominhkhoii/stretch-cat/stretch-cat</code>
         <button class="brew-copy" data-copy="brew install --cask vominhkhoii/stretch-cat/stretch-cat" aria-label="Copy install command"><i class="ph ph-copy"></i></button>
       </div>
+      <button class="support-cta" type="button" data-support data-rise>
+        <i class="ph-bold ph-currency-dollar"></i> Support StretchCat
+      </button>
     </section>
   </main>
 
   <footer class="foot">
-    <div class="foot-brand"><img src="assets/icon.png" alt="" width="28" height="28"/> Stretch Cat</div>
+    <div class="foot-brand"><img src="assets/icon.png" alt="" width="28" height="28"/> StretchCat</div>
     <nav class="foot-links">
       <a href="https://github.com/VoMinhKhoii/StretchCat">GitHub</a>
       <a href="https://github.com/VoMinhKhoii/StretchCat/releases">Releases</a>
       <a href="https://github.com/VoMinhKhoii/StretchCat/blob/main/LICENSE">License</a>
+      <button class="foot-support" type="button" data-support>Support</button>
     </nav>
     <p class="foot-note">Made for people who sit too much.</p>
   </footer>
+
+  <!-- SUPPORT DIALOG -->
+  <div class="support-overlay" id="supportModal" hidden>
+    <div class="support-card" role="dialog" aria-modal="true" aria-labelledby="supTitle">
+      <button class="sup-close" id="supClose" type="button" aria-label="Close">
+        <i class="ph ph-x"></i>
+      </button>
+      <h3 id="supTitle">Buy our cat a treat 🐟</h3>
+      <p class="sup-sub">StretchCat is free. But if it helps with your long work/study session, a coffee keeps our cat fed.</p>
+      <p class="sup-sub">Thanks a lot 🐾</p>
+      <div class="sup-toggle" role="tablist" aria-label="Payment method">
+        <button class="sup-tab is-on" type="button" role="tab" aria-selected="true" data-qr="bank">Bank</button>
+        <button class="sup-tab" type="button" role="tab" aria-selected="false" data-qr="momo">Momo</button>
+      </div>
+      <div class="sup-qrs">
+        <figure class="sup-qr is-active" data-qr="bank">
+          <img src="assets/support-bank.jpg" alt="Vietcombank VietQR code for Vo Minh Khoi" loading="lazy" />
+          <figcaption>Vietcombank</figcaption>
+          <a class="sup-dl" href="assets/support-bank.jpg" download="stretchcat-bank.jpg">
+            <i class="ph ph-download-simple"></i> Save
+          </a>
+        </figure>
+        <figure class="sup-qr" data-qr="momo">
+          <img src="assets/support-momo.jpg" alt="Momo / VietQR code for Võ Minh Khôi" loading="lazy" />
+          <figcaption>Momo</figcaption>
+          <a class="sup-dl" href="assets/support-momo.jpg" download="stretchcat-momo.jpg">
+            <i class="ph ph-download-simple"></i> Save
+          </a>
+        </figure>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
