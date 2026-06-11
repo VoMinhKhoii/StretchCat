@@ -65,9 +65,13 @@ Local builds are ad-hoc signed (fine for yourself). Public releases are
 ```bash
 DEV_ID_APP="Developer ID Application: Khoi Vo (ZNG57U88R5)" \
 NOTARY_PROFILE="stretchcat" \
-VERSION="1.0.0" \
+VERSION="1.1.0" \
 ./scripts/release.sh
 ```
+
+`main` is protected, so the final cask bump is opened as a **pull request**
+(branch `cask-bump-v<version>`) instead of pushed to `main`. Review and merge
+it to finish publishing. Run the release from a clean working tree on `main`.
 
 **Mac App Store** — see [APPSTORE.md](APPSTORE.md).
 
