@@ -233,6 +233,59 @@
     }
   })();
 
+  /* ---- support dialog ---- */
+  (function () {
+    const overlay = document.getElementById("supportModal");
+    const card = overlay && overlay.querySelector(".support-card");
+    const closeBtn = document.getElementById("supClose");
+    if (!overlay || !card) return;
+
+    let lastTrigger = null;
+
+    function openSupport(trigger) {
+      lastTrigger = trigger || null;
+      overlay.hidden = false;
+      requestAnimationFrame(() => overlay.classList.add("is-open"));
+      closeBtn && closeBtn.focus();
+    }
+    function closeSupport() {
+      overlay.classList.remove("is-open");
+      const done = () => { overlay.hidden = true; if (lastTrigger) lastTrigger.focus(); };
+      if (reduce) { done(); return; }
+      overlay.addEventListener("transitionend", function h(e) {
+        if (e.target !== overlay) return;
+        overlay.removeEventListener("transitionend", h);
+        done();
+      }, { once: true });
+    }
+
+    document.querySelectorAll("[data-support]").forEach((el) =>
+      el.addEventListener("click", () => openSupport(el))
+    );
+
+    // Bank/Momo toggle — only visible when the card is too narrow for both QRs.
+    overlay.querySelectorAll(".sup-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const which = tab.dataset.qr;
+        overlay.querySelectorAll(".sup-tab").forEach((t) => {
+          const on = t === tab;
+          t.classList.toggle("is-on", on);
+          t.setAttribute("aria-selected", String(on));
+        });
+        overlay.querySelectorAll(".sup-qr").forEach((qr) =>
+          qr.classList.toggle("is-active", qr.dataset.qr === which)
+        );
+      });
+    });
+    closeBtn && closeBtn.addEventListener("click", closeSupport);
+    overlay.addEventListener("pointerdown", (e) => {
+      if (!card.contains(e.target)) closeSupport();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !overlay.hidden) closeSupport();
+    });
+  })();
+
   /* ---- brew copy ---- */
   const btn = document.querySelector(".brew-copy");
   if (btn) {
