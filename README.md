@@ -7,6 +7,11 @@ hours — starring an animated calico cat you can follow along with.
   <img src="Resources/AppIcon_1024.png" width="160" alt="Stretch Cat icon">
 </p>
 
+<p align="center">
+  <a href="https://github.com/VoMinhKhoii/StretchCat/releases"><img src="https://img.shields.io/github/downloads/VoMinhKhoii/StretchCat/total?style=flat&color=F26419&label=downloads" alt="Total downloads"></a>
+  <a href="https://github.com/VoMinhKhoii/StretchCat/releases/latest"><img src="https://img.shields.io/github/v/release/VoMinhKhoii/StretchCat?style=flat&color=F26419&label=latest" alt="Latest release"></a>
+</p>
+
 - Lives in the **menu bar** (no Dock icon), with a custom cat-face icon.
 - Every 2 hours: a **notification** + a window where the **cat plays a full
   stretch routine** on a loop. Snooze 10 min or mark Done.
