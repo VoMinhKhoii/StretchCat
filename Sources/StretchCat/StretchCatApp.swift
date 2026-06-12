@@ -1,6 +1,7 @@
 import SwiftUI
 import AppKit
 import UserNotifications
+import StretchCatCore
 
 @main
 struct StretchCatApp: App {
@@ -152,7 +153,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     /// Snooze: re-show a break in 10 minutes without disturbing the cadence.
     private func snooze() {
-        let snoozeTimer = Timer(timeInterval: 10 * 60, repeats: false) { [weak self] _ in
+        let snoozeTimer = Timer(timeInterval: TimeInterval(StretchSchedule.snoozeMinutes * 60), repeats: false) { [weak self] _ in
             self?.manager.stretchNow()
         }
         RunLoop.main.add(snoozeTimer, forMode: .common)

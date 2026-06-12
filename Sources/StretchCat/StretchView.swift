@@ -1,5 +1,6 @@
 import SwiftUI
 import AppKit
+import StretchCatCore
 
 /// The follow-along card: the cat plays its full stretch routine on a loop,
 /// with a cue, an auto-dismiss countdown, and Snooze / Done controls.
@@ -8,7 +9,7 @@ struct StretchView: View {
     var onDone: () -> Void
     var onSnooze: () -> Void
 
-    @State private var secondsLeft = 30
+    @State private var secondsLeft = StretchSchedule.autoCloseSeconds
     @State private var appear = false
 
     private let countdown = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
