@@ -286,6 +286,27 @@
     });
   })();
 
+  /* ---- live download count (GitHub releases) ---- */
+  (function () {
+    const slots = document.querySelectorAll("[data-dl-count]");
+    if (!slots.length) return;
+    fetch("https://api.github.com/repos/VoMinhKhoii/StretchCat/releases")
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((releases) => {
+        const total = releases.reduce(
+          (sum, rel) =>
+            sum + (rel.assets || []).reduce((a, asset) => a + (asset.download_count || 0), 0),
+          0
+        );
+        if (!total) return;
+        document
+          .querySelectorAll(".dl-count-num")
+          .forEach((el) => (el.textContent = total.toLocaleString()));
+        slots.forEach((el) => (el.hidden = false));
+      })
+      .catch(() => {});
+  })();
+
   /* ---- brew copy ---- */
   const btn = document.querySelector(".brew-copy");
   if (btn) {
