@@ -174,7 +174,9 @@ fn toggle_panel<R: Runtime>(app: &AppHandle<R>, icon_rect: Rect) {
     let x = (ix + iw / 2.0 - pw / 2.0).clamp(mx, mx + mw - pw);
     let y = if below { iy + ih } else { iy - ph };
 
-    let _ = panel.set_position(Position::Physical(PhysicalPosition::new(x as i32, y as i32)));
+    let _ = panel.set_position(Position::Physical(PhysicalPosition::new(
+        x as i32, y as i32,
+    )));
     let _ = panel.set_always_on_top(true);
     let _ = panel.show();
     let _ = panel.set_focus();
