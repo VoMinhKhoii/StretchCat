@@ -1,0 +1,27 @@
+[package]
+name = "stretchcat"
+version = "0.1.0"
+edition = "2021"
+description = "StretchCat for Windows — a lightweight tray stretch reminder."
+default-run = "stretchcat"
+
+[lib]
+name = "stretchcat_lib"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+reminder-core = { path = "../reminder-core" }
+tauri = { version = "2", features = ["tray-icon", "macos-private-api"] }
+tauri-plugin-notification = "2"
+tauri-plugin-autostart = "2"
+tauri-plugin-store = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# macOS-only: set the NSWindow collection behavior so the card/panel float over
+# full-screen Spaces (no Tauri API for `fullScreenAuxiliary`). Never built on Windows.
+[target.'cfg(target_os = "macos")'.dependencies]
+objc = "0.2"

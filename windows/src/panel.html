@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stretch Cat</title>
+    <link rel="stylesheet" href="panel.css" />
+  </head>
+  <body>
+    <div class="panel">
+      <div class="hero">
+        <img class="cat" src="assets/cat_stretch.gif" alt="" />
+        <div class="hero-grad"></div>
+        <div class="hero-text">
+          <div class="brand">Stretch Cat</div>
+          <div class="status" id="status">Scheduling…</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="primary" id="stretchNow">✨ Stretch now</button>
+
+        <div class="seg-label">REMIND ME EVERY</div>
+        <div class="seg" id="seg">
+          <button data-h="1">1 hour</button>
+          <button data-h="2">2 hours</button>
+          <button data-h="3">3 hours</button>
+        </div>
+
+        <hr />
+
+        <label class="row">
+          <span class="row-label">🔔&nbsp;&nbsp;Reminders</span>
+          <input type="checkbox" id="enabled" class="switch" />
+        </label>
+        <label class="row">
+          <span class="row-label">⏻&nbsp;&nbsp;Launch at login</span>
+          <input type="checkbox" id="autostart" class="switch" />
+        </label>
+
+        <hr />
+
+        <button class="quit" id="quit">Quit Stretch Cat</button>
+      </div>
+    </div>
+
+    <script src="panel.js"></script>
+  </body>
+</html>
