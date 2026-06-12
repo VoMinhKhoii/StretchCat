@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>StretchCat - a cat that nags you to stretch</title>
   <meta name="description" content="StretchCat lives in your Mac menu bar and pops up every two hours for a little stretch routine you actually do. Free and notarized for macOS." />
+  <link rel="canonical" href="https://www.stretchcat.me/" />
   <meta property="og:title" content="StretchCat" />
   <meta property="og:description" content="A cat that nags you to stand up and stretch every two hours. Free for macOS." />
   <meta property="og:type" content="website" />
@@ -28,6 +29,25 @@
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
   <link rel="stylesheet" href="styles.css" />
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebSite", "name": "StretchCat", "url": "https://www.stretchcat.me/" },
+      {
+        "@type": "SoftwareApplication",
+        "name": "StretchCat",
+        "operatingSystem": "macOS 13+",
+        "applicationCategory": "HealthApplication",
+        "url": "https://www.stretchcat.me/",
+        "downloadUrl": "https://github.com/VoMinhKhoii/StretchCat/releases/latest/download/StretchCat.dmg",
+        "image": "https://www.stretchcat.me/assets/icon.png",
+        "description": "A macOS menu-bar app that reminds you to stand up and stretch every two hours, starring an animated calico cat.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
