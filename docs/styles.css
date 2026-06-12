@@ -256,6 +256,7 @@ a{color:inherit; text-decoration:none;}
   background:linear-gradient(160deg,var(--cream-2),#fbe3c7); border-radius:var(--r-lg); overflow:hidden;}
 .download h2{font-size:clamp(2.1rem,4.2vw,3.1rem);} .download>p{color:var(--ink-soft); margin:.8rem 0 2rem;}
 .dl-cat{position:absolute; right:-26px; bottom:-30px; width:210px; opacity:.18; transform:rotate(-8deg); pointer-events:none;}
+.dl-actions{display:flex; flex-wrap:wrap; gap:.9rem; justify-content:center;}
 .dl-meta{font-size:.92rem; color:var(--ink-soft); margin-top:1.1rem;}
 .brew{display:inline-flex; align-items:center; gap:.7rem; flex-wrap:wrap; justify-content:center; margin-top:1.8rem;
   background:var(--ink); color:var(--cream); padding:.7rem .8rem .7rem 1.1rem; border-radius:var(--r-pill); font-size:.92rem;}
