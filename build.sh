@@ -68,7 +68,18 @@ cat > "${APP_DIR}/Contents/Info.plist" <<PLIST
 PLIST
 
 echo "==> Stripping extended attributes"
-xattr -cr "${APP_DIR}"
+# iCloud Drive (this repo lives under ~/Documents) re-stamps com.apple.FinderInfo
+# onto the freshly written bundle, which codesign rejects as "detritus". A single
+# strip can lose the race, so strip-and-verify with a few retries until the
+# rejectable attrs are actually gone (com.apple.provenance is fine — codesign
+# accepts it).
+for _ in 1 2 3 4 5; do
+    xattr -cr "${APP_DIR}"
+    if ! xattr -rl "${APP_DIR}" | grep -qE 'FinderInfo|ResourceFork'; then
+        break
+    fi
+    sleep 1
+done
 
 echo "==> Code signing (identity: ${SIGN_IDENTITY})"
 if [ "${SIGN_IDENTITY}" = "-" ]; then
