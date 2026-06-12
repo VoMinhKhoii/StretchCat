@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import UserNotifications
 import ServiceManagement
+import AppKit
 
 /// Owns the reminder schedule, notification posting, and persisted settings.
 final class ReminderManager: ObservableObject {
@@ -50,7 +51,31 @@ final class ReminderManager: ObservableObject {
 
     func start() {
         requestNotificationAuthorization()
+        // Catch up the instant the machine wakes, rather than waiting for the
+        // next periodic tick. Sleep suspends timers, so a deadline that passed
+        // mid-sleep would otherwise leave the countdown stuck until the tick.
+        NSWorkspace.shared.notificationCenter.addObserver(
+            self,
+            selector: #selector(systemDidWake),
+            name: NSWorkspace.didWakeNotification,
+            object: nil
+        )
         scheduleNext()
+    }
+
+    deinit {
+        NSWorkspace.shared.notificationCenter.removeObserver(self)
+    }
+
+    @objc private func systemDidWake() {
+        checkDeadline()
+    }
+
+    /// Fire now if the scheduled deadline has already passed. Safe to call
+    /// repeatedly — a no-op while paused, unscheduled, or still counting down.
+    private func checkDeadline() {
+        guard !isPaused, let due = nextFireDate, Date() >= due else { return }
+        fire()
     }
 
     func requestNotificationAuthorization() {
@@ -71,14 +96,19 @@ final class ReminderManager: ObservableObject {
 
         let interval = TimeInterval(intervalHours * 3600)
         let fireDate = Date().addingTimeInterval(interval)
+        DispatchQueue.main.async { self.nextFireDate = fireDate }
 
-        let t = Timer(timeInterval: interval, repeats: false) { [weak self] _ in
-            self?.fire()
+        // A repeating deadline check, not a single one-shot timer: a one-shot
+        // Timer scheduled hours out can be dropped across system sleep / App Nap,
+        // leaving the countdown stuck at "under a minute" with no reminder ever
+        // firing. This ticks periodically and fires the moment it sees the
+        // deadline has passed (e.g. right after the machine wakes).
+        let t = Timer(timeInterval: 15, repeats: true) { [weak self] _ in
+            self?.checkDeadline()
         }
+        t.tolerance = 5
         RunLoop.main.add(t, forMode: .common)
         timer = t
-
-        DispatchQueue.main.async { self.nextFireDate = fireDate }
     }
 
     private func fire() {
