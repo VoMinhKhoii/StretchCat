@@ -4,6 +4,3 @@ target/
 # Tauri generated schemas
 src-tauri/gen/
 
-# local dev-only time override for this machine's toolchain (see .cargo/config.toml)
-.time-local/
-.cargo/

@@ -21,6 +21,11 @@ tauri-plugin-store = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
+# Pin the transitive `time` crate: 0.3.48 hits a rustc E0119 coherence bug with
+# `cookie` (breaks the whole Tauri build); 0.3.47 is the newest version that
+# compiles and still satisfies the `^0.3.47` constraint from plist/serde_with.
+time = "=0.3.47"
+
 # macOS-only: set the NSWindow collection behavior so the card/panel float over
 # full-screen Spaces (no Tauri API for `fullScreenAuxiliary`). Never built on Windows.
 [target.'cfg(target_os = "macos")'.dependencies]
