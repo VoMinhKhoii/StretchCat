@@ -1,0 +1,129 @@
+:root {
+  --cream: #faf9f7;
+  --accent: #ff8c19;
+  --ink: #1c1c1e;
+  --muted: #6b6b70;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  /* Transparent so the rounded card floats over the desktop. */
+  background: transparent;
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+  user-select: none;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.card {
+  width: 340px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(248, 248, 250, 0.96);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  animation: pop 0.42s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.cat {
+  display: block;
+  width: 340px;
+  height: 232px;
+  object-fit: cover;
+  background: var(--cream);
+}
+
+.body {
+  padding: 18px 24px 20px;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.cue {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 5px;
+  line-height: 1.35;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.btn {
+  flex: 1;
+  min-height: 32px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.12s ease, transform 0.05s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.snooze {
+  background: rgba(120, 120, 128, 0.16);
+  color: var(--ink);
+}
+
+.snooze:hover {
+  filter: brightness(0.95);
+}
+
+.done {
+  background: var(--accent);
+  color: #fff;
+}
+
+.done:hover {
+  filter: brightness(1.05);
+}
+
+.countdown {
+  font-size: 11px;
+  color: #9a9aa0;
+  margin-top: 12px;
+}

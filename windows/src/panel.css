@@ -1,0 +1,185 @@
+:root {
+  --cream: #faf9f7;
+  --accent: #ff8c19;
+  --ink: #1c1c1e;
+  --muted: #8a8a90;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background: transparent;
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+  user-select: none;
+  overflow: hidden;
+}
+
+.panel {
+  width: 300px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(30, 30, 32, 0.97);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  color: #fff;
+}
+
+/* Hero: live cat video + brand + countdown */
+.hero {
+  position: relative;
+  height: 132px;
+  background: var(--cream);
+}
+
+.cat {
+  width: 100%;
+  height: 132px;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-grad {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+}
+
+.hero-text {
+  position: absolute;
+  left: 14px;
+  bottom: 11px;
+}
+
+.brand {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.status {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.92;
+  margin-top: 1px;
+}
+
+/* Controls */
+.controls {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.primary {
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary:hover {
+  filter: brightness(1.05);
+}
+
+.seg-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  margin-bottom: -4px;
+}
+
+.seg {
+  display: flex;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.seg button {
+  flex: 1;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #d8d8da;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.seg button.on {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* iOS-style switch */
+.switch {
+  appearance: none;
+  width: 38px;
+  height: 22px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.18);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s ease;
+}
+
+.switch:checked {
+  background: var(--accent);
+}
+
+.switch:checked::after {
+  transform: translateX(16px);
+}
+
+.quit {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+}
+
+.quit:hover {
+  color: #fff;
+}

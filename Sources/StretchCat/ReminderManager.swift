@@ -3,6 +3,7 @@ import SwiftUI
 import UserNotifications
 import ServiceManagement
 import AppKit
+import StretchCatCore
 
 /// Owns the reminder schedule, notification posting, and persisted settings.
 final class ReminderManager: ObservableObject {
@@ -42,7 +43,7 @@ final class ReminderManager: ObservableObject {
 
     init() {
         let savedInterval = defaults.object(forKey: Keys.interval) as? Int
-        self.intervalHours = savedInterval ?? 2
+        self.intervalHours = savedInterval ?? StretchSchedule.defaultIntervalHours
         self.isPaused = defaults.bool(forKey: Keys.paused)
         self.launchAtLogin = (SMAppService.mainApp.status == .enabled)
     }
@@ -94,8 +95,7 @@ final class ReminderManager: ObservableObject {
             return
         }
 
-        let interval = TimeInterval(intervalHours * 3600)
-        let fireDate = Date().addingTimeInterval(interval)
+        let fireDate = StretchSchedule.nextFireDate(from: Date(), intervalHours: intervalHours)
         DispatchQueue.main.async { self.nextFireDate = fireDate }
 
         // A repeating deadline check, not a single one-shot timer: a one-shot
