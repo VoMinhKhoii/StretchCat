@@ -19,6 +19,8 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Show Swift version
         run: swift --version
       - name: Build

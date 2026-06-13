@@ -3,7 +3,7 @@ import Foundation
 /// Timing constants and pure scheduling math shared by the app and its tests.
 ///
 /// These values define StretchCat's behavior and MUST stay in lockstep with the
-/// Windows (Tauri) port in `windows/src-tauri/src/reminder.rs`. The matching unit
+/// Windows (Tauri) port in `windows/reminder-core/src/lib.rs`. The matching unit
 /// tests on both sides assert the same numbers, so changing one without the other
 /// turns a test red.
 public enum StretchSchedule {

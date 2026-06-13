@@ -4,7 +4,7 @@ import Foundation
 /// full routine, so these just add friendly variety to the notification/card.
 ///
 /// Pure, platform-agnostic logic lives here so it can be unit-tested and kept
-/// in lockstep with the Windows (Tauri) port — see `windows/src-tauri/src/reminder.rs`.
+/// in lockstep with the Windows (Tauri) port — see `windows/reminder-core/src/lib.rs`.
 public struct Exercise: Identifiable, Hashable {
     public let id = UUID()
     public let name: String

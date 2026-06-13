@@ -2,7 +2,7 @@
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
   "description": "Permissions for the stretch card window and tray controls.",
-  "windows": ["card", "panel", "main"],
+  "windows": ["card", "panel"],
   "permissions": [
     "core:default",
     "core:event:default",

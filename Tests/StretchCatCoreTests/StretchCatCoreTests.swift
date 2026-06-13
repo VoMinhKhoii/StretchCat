@@ -2,7 +2,7 @@ import XCTest
 @testable import StretchCatCore
 
 /// Behavior guard for the macOS app. These assertions intentionally mirror the
-/// Rust tests in `windows/src-tauri/src/reminder.rs` — if the two ports drift,
+/// Rust tests in `windows/reminder-core/src/lib.rs` — if the two ports drift,
 /// one side goes red.
 final class StretchCatCoreTests: XCTestCase {
 
